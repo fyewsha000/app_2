@@ -12,7 +12,7 @@ class PostImagesController < ApplicationController
 			render :new
 		end
 	end
-	
+
 	def index
 		@post_images = PostImage.page(params[:page]).reverse_order
 	end
@@ -20,6 +20,12 @@ class PostImagesController < ApplicationController
 		@post_image = PostImage.find(params[:id])
         @post_comment = PostComment.new
 	end
+
+	def destroy
+		@post_image = PostImage.find(params[:id])
+        @post_image.destroy
+        redirect_to post_images_path
+    end
 
 	private
 	     def post_image_params
